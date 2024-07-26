@@ -13,10 +13,22 @@ import java.util.*
 @QuarkusTest
 class RecipeResourceTest {
     val baseUrl = "/recipe"
-    val recipes = listOf(
-        Recipe("recipe one", UUID.randomUUID()),
-        Recipe("recipe two", UUID.randomUUID())
+    private val ingredients = listOf(
+        Ingredient("ingredient one"),
+        Ingredient("ingredient two")
     )
+
+    final val recipes = listOf(
+        Recipe("recipe one", mutableListOf()),
+        Recipe("recipe two", mutableListOf())
+    )
+
+    init {
+        recipes.forEach { r ->
+            r.ingredients.add(RecipeIngredient(100, "dl", r.id, ingredient = ingredients[0].id))
+            r.ingredients.add(RecipeIngredient(100, "dl", r.id, ingredient = ingredients[1].id))
+        }
+    }
 
     @InjectMock
     lateinit var repo: RecipeRepository
@@ -34,7 +46,7 @@ class RecipeResourceTest {
             .then()
             .statusCode(200)
             .extract()
-            .`as`(Array<Ingredient>::class.java).toList()
+            .`as`(Array<Recipe>::class.java).toList()
         assertEquals(2, responseRecipes.size)
     }
 }

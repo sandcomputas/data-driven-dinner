@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 @QuarkusTest
 class IngredientResourceTest {
     val baseUrl = "/ingredient"
-    val ingredients = listOf(Ingredient("food one", UUID.randomUUID()), Ingredient("food two", UUID.randomUUID()))
+    val ingredients = listOf(Ingredient("food one"), Ingredient("food two"))
 
     @InjectMock
     lateinit var repo: IngredientRepository
