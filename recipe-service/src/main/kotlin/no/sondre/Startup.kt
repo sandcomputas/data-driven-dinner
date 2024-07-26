@@ -5,7 +5,6 @@ import jakarta.enterprise.context.ApplicationScoped
 import jakarta.enterprise.event.Observes
 import jakarta.inject.Inject
 import jakarta.transaction.Transactional
-import java.util.*
 import java.util.logging.Logger
 
 @ApplicationScoped
@@ -37,6 +36,5 @@ class Startup {
             r.addIngredient(RecipeIngredient(100, "dl", r.id, ingredient = ingredients[1].id))
         }
         ingredientRepository.persist(ingredients)
-        recipeRepository.persist(recipes)
     }
 }
