@@ -1,5 +1,6 @@
 package no.sondre
 
+import io.quarkus.arc.profile.IfBuildProfile
 import io.quarkus.runtime.StartupEvent
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.enterprise.event.Observes
@@ -7,6 +8,7 @@ import jakarta.inject.Inject
 import jakarta.transaction.Transactional
 import java.util.logging.Logger
 
+@IfBuildProfile("dev")
 @ApplicationScoped
 class Startup {
 

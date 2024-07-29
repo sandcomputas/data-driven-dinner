@@ -1,19 +1,15 @@
 package no.sondre
 
-import io.quarkus.test.InjectMock
 import io.quarkus.test.junit.QuarkusTest
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import jakarta.inject.Inject
-import jakarta.validation.constraints.NotNull
 import org.apache.http.HttpStatus
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
-import org.mockito.Mockito
-import java.util.*
-import org.junit.jupiter.api.Assertions.assertEquals
-
 import org.hamcrest.Matchers.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
+import java.util.*
+
 //https://www.baeldung.com/java-quarkus-testing
 
 @QuarkusTest
@@ -51,6 +47,10 @@ class IngredientResourceTest {
 
     @Test
     fun `can list all ingredients`() {
+        val saves = 3
+        for (i in 1..saves) {
+            `can save new ingredient`()
+        }
         val responseIngredients = given().contentType(ContentType.JSON)
             .`when`()
             .get(baseUrl)
@@ -58,8 +58,6 @@ class IngredientResourceTest {
             .statusCode(200)
             .extract()
             .`as`(Array<Ingredient>::class.java).toList()
-        assertEquals(2, responseIngredients.size)
+        assert(responseIngredients.size >= saves)
     }
-
-
 }

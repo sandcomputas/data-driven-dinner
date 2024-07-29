@@ -1,19 +1,14 @@
 package no.sondre
 
-import com.fasterxml.jackson.databind.util.JSONPObject
-import io.quarkus.test.InjectMock
 import io.quarkus.test.junit.QuarkusTest
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import jakarta.inject.Inject
-import jakarta.json.JsonObject
 import org.apache.http.HttpStatus
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
-import org.mockito.Mockito
-import java.util.*
 import org.hamcrest.Matchers.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
+import java.util.*
 
 //import io.restassured.RestAssured.*
 
