@@ -3,7 +3,6 @@ package no.sondre
 import io.quarkus.test.junit.QuarkusTest
 import io.restassured.RestAssured.*
 import io.restassured.http.ContentType
-import jakarta.inject.Inject
 import org.apache.http.HttpStatus
 import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -18,17 +17,7 @@ class RecipeResourceTest {
         Ingredient("ingredient two")
     )
 
-    final val recipe = Recipe("recipe one", mutableListOf())
-
-//    init {
-//        recipes.forEach { r ->
-//            r.ingredients.add(RecipeIngredient(100, "dl", r.id, ingredient = ingredients[0].id!!))
-//            r.ingredients.add(RecipeIngredient(100, "dl", r.id, ingredient = ingredients[1].id!!))
-//        }
-//    }
-
-    @Inject
-    lateinit var repo: RecipeRepository
+    private final val recipe = Recipe("recipe one", mutableListOf())
 
     fun assureIngredientsExists() {
         val savedIngredients = given().contentType(ContentType.JSON)

@@ -2,8 +2,7 @@ package no.sondre
 
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
-import jakarta.ws.rs.BadRequestException
-import java.util.UUID
+import java.util.*
 
 @Entity
 @Table(name = "recipes")
