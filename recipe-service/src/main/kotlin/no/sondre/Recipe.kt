@@ -7,7 +7,7 @@ import java.util.UUID
 
 @Entity
 @Table(name = "recipes")
-class Recipe(
+class Recipe (
 
     @NotNull
     val name: String,
