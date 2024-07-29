@@ -1,7 +1,7 @@
 package no.sondre
 
 import io.quarkus.test.junit.QuarkusTest
-import io.restassured.RestAssured.given
+import io.restassured.RestAssured.*
 import io.restassured.http.ContentType
 import jakarta.inject.Inject
 import org.apache.http.HttpStatus
@@ -9,8 +9,6 @@ import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.util.*
-
-//import io.restassured.RestAssured.*
 
 @QuarkusTest
 class RecipeResourceTest {
@@ -35,16 +33,34 @@ class RecipeResourceTest {
     @Inject
     lateinit var repo: RecipeRepository
 
-    // Don't think I want to mock out the persistence layer
-//    @InjectMock
-//    lateinit var repo: RecipeRepository
-//    @BeforeEach
-//    fun mockRecipieRepository() {
-//        Mockito.`when`(repo.listAll()).thenReturn(recipes)
-//    }
+    fun assureIngredientsExists() {
+        val savedIngredients = given().contentType(ContentType.JSON)
+            .`when`()
+            .get("ingredient")
+            .then()
+            .statusCode(200)
+            .extract()
+            .`as`(Array<Ingredient>::class.java).toList()
+        val missing = ingredients.filter { i ->
+           i.name !in savedIngredients.map { it.name }
+        }
+        for (m in missing) {
+            saveIngredient(m)
+        }
+    }
+
+    fun saveIngredient(i: Ingredient) {
+        given()
+            .contentType(ContentType.JSON)
+            .body(i)
+            .`when`()
+            .post("ingredient")
+            .then()
+            .statusCode(HttpStatus.SC_OK)
+    }
 
     @Test
-    fun `can save recipe recipes`() {
+    fun `can save recipe without ingredients`() {
         val response = given()
             .contentType(ContentType.JSON)
             .body(recipes[0])
@@ -62,6 +78,14 @@ class RecipeResourceTest {
         val respRecipe = response.extract().`as`(Recipe::class.java)
         assertEquals(respRecipe.name, recipes[0].name)
     }
+
+    @Test
+    fun `can save recipe with ingredients`() {
+        assureIngredientsExists()
+        println("do we get here?")
+    }
+
+
 
     @Test
     fun `can list all recipes`() {
