@@ -9,7 +9,12 @@ import java.util.*
 @ApplicationScoped
 @Transactional
 class RecipeRepository : PanacheRepository<Recipe> {
+
+    fun findById(id: UUID): Recipe? {
+        return find("id", id).firstResult()
+    }
+
     fun findByIdOrThrow(id: UUID): Recipe {
-        return find("id", id).firstResult() ?: throw NotFoundException("Recipe with ID $id not found")
+        return findById(id) ?: throw NotFoundException("Recipe with ID $id not found")
     }
 }

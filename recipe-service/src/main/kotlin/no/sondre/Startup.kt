@@ -31,10 +31,10 @@ class Startup {
         )
         // Save initial recipe without ingredient (what we will have to do in the service)
         recipeRepository.persist(recipes)
-        recipes.forEach { r ->
-            r.addIngredient(RecipeIngredient(100, "dl", r.id, ingredient = ingredients[0].id))
-            r.addIngredient(RecipeIngredient(100, "dl", r.id, ingredient = ingredients[1].id))
-        }
         ingredientRepository.persist(ingredients)
+        recipes.forEach { r ->
+            r.addIngredient(RecipeIngredient(100, "dl", r.id, ingredient = ingredients[0].id!!))
+            r.addIngredient(RecipeIngredient(100, "dl", r.id, ingredient = ingredients[1].id!!))
+        }
     }
 }

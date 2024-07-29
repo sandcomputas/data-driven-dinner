@@ -2,6 +2,7 @@ package no.sondre
 
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
+import jakarta.ws.rs.BadRequestException
 import java.util.UUID
 
 @Entity
@@ -12,7 +13,7 @@ class Recipe(
     val name: String,
 
     // TODO: not sure about the cascade option...
-    @OneToMany(mappedBy = "recipe", cascade = [CascadeType.ALL], orphanRemoval = true)
+    @OneToMany(mappedBy = "recipe", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.EAGER)
     val ingredients: MutableList<RecipeIngredient> = mutableListOf(),
 
 ) {
@@ -25,5 +26,11 @@ class Recipe(
     // TOOD: consider making all fields private to avoid such mistakes/bad pattern
     fun addIngredient(i: RecipeIngredient) {
         ingredients.add(i)
+    }
+
+    fun complete() {
+        ingredients.forEach {
+            it.complete(id)
+        }
     }
 }

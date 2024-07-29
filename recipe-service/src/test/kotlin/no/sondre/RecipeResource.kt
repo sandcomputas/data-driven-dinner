@@ -5,6 +5,7 @@ import io.quarkus.test.InjectMock
 import io.quarkus.test.junit.QuarkusTest
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
+import jakarta.inject.Inject
 import jakarta.json.JsonObject
 import org.apache.http.HttpStatus
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.Test
 import org.mockito.Mockito
 import java.util.*
 import org.hamcrest.Matchers.*
+
 //import io.restassured.RestAssured.*
 
 @QuarkusTest
@@ -28,17 +30,19 @@ class RecipeResourceTest {
         Recipe("recipe two", mutableListOf())
     )
 
-    init {
-        recipes.forEach { r ->
-            r.ingredients.add(RecipeIngredient(100, "dl", r.id, ingredient = ingredients[0].id))
-            r.ingredients.add(RecipeIngredient(100, "dl", r.id, ingredient = ingredients[1].id))
-        }
-    }
+//    init {
+//        recipes.forEach { r ->
+//            r.ingredients.add(RecipeIngredient(100, "dl", r.id, ingredient = ingredients[0].id!!))
+//            r.ingredients.add(RecipeIngredient(100, "dl", r.id, ingredient = ingredients[1].id!!))
+//        }
+//    }
 
-    @InjectMock
+    @Inject
     lateinit var repo: RecipeRepository
 
     // Don't think I want to mock out the persistence layer
+//    @InjectMock
+//    lateinit var repo: RecipeRepository
 //    @BeforeEach
 //    fun mockRecipieRepository() {
 //        Mockito.`when`(repo.listAll()).thenReturn(recipes)
@@ -55,7 +59,8 @@ class RecipeResourceTest {
             .statusCode(HttpStatus.SC_OK)
             .body(
                 "id", notNullValue(),
-                "name", `is`(recipes[0].name,
+                "name", `is`(
+                    recipes[0].name,
                 )
             )
         // Deserialize example, not strictly needed here
@@ -65,6 +70,7 @@ class RecipeResourceTest {
 
     @Test
     fun `can list all recipes`() {
+//        this.`can save recipe recipes`()
         val responseRecipes = given().contentType(ContentType.JSON)
             .`when`()
             .get(baseUrl)

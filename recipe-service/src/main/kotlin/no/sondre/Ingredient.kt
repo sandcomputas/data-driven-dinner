@@ -11,7 +11,7 @@ class Ingredient(
     @NotNull
     val name: String,
 
-) {
     @Id
-    val id: UUID = UUID.randomUUID()
-}
+    @GeneratedValue(strategy = GenerationType.UUID)
+    var id: UUID? = null
+)

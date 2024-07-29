@@ -14,7 +14,11 @@ class RecipeIngredient(
     val unit: String, // TODO: make enum
 
     @Id
-    val recipe: UUID,
+    var recipe: UUID? = null,
     @Id
     val ingredient: UUID
-)
+) {
+    fun complete(recipe: UUID) {
+        this.recipe = recipe
+    }
+}
