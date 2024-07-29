@@ -109,8 +109,11 @@ class RecipeResourceTest {
             .then()
             .statusCode(HttpStatus.SC_OK)
         val respRecipe = response.extract().`as`(Recipe::class.java)
+        assert(respRecipe.name == recipe.name) { "name must be same as name of input object"}
 
-        println("do we get here?")
+        assert(respRecipe.ingredients.filter {
+            it.recipe == respRecipe.id
+        }.size == recipe.ingredients.size) { "all added recipeIngredients must have been given a recipe ID that corresponds with the id of the Recipe" }
     }
 
     @Test
