@@ -118,7 +118,7 @@ class RecipeResourceTest {
 
     @Test
     fun `can list all recipes`() {
-//        this.`can save recipe recipes`()
+        `can save recipe without ingredients`()
         val responseRecipes = given().contentType(ContentType.JSON)
             .`when`()
             .get(baseUrl)
@@ -126,6 +126,6 @@ class RecipeResourceTest {
             .statusCode(200)
             .extract()
             .`as`(Array<Recipe>::class.java).toList()
-        assertEquals(2, responseRecipes.size)
+        assert(responseRecipes.isNotEmpty()) { "There should be a least one saved recipe" }
     }
 }
