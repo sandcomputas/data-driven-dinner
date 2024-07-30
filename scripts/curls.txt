@@ -1,6 +1,6 @@
 curl localhost:8080/recipe
 curl localhost:8080/ingredient
-curl -iX POST -H 'Content-Type: application/json' -d '{"name": "dish one"}' http://localhost:8080/recipe
+curl -iX POST -H 'Content-Type: application/json' -d '{"name": "dish one", "ingredients": [{"name": "ingredient one"}, {"name": "ingredient two"}] }' http://localhost:8080/recipe
 curl -iX POST -H 'Content-Type: application/json' -d '{"name": "ingredient one"}' http://localhost:8080/ingredient
 
 
