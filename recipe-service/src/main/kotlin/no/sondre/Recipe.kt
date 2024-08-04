@@ -12,6 +12,7 @@ class Recipe (
     val name: String,
 
     // TODO: not sure about the cascade option...
+    //   I believe None is the correct option but need to test...
     @OneToMany(mappedBy = "recipe", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.EAGER)
     val ingredients: MutableList<RecipeIngredient> = mutableListOf(),
 

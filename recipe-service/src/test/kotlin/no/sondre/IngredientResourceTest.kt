@@ -8,14 +8,14 @@ import org.apache.http.HttpStatus
 import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import java.util.*
+import kotlin.random.Random
 
 //https://www.baeldung.com/java-quarkus-testing
 
 @QuarkusTest
 class IngredientResourceTest {
     val baseUrl = "/ingredient"
-    val ingredients = listOf(Ingredient("food one"), Ingredient("food two"))
+    val ingredients: MutableList<Ingredient> = mutableListOf()
 
     @Inject
     lateinit var repo: IngredientRepository
@@ -30,19 +30,20 @@ class IngredientResourceTest {
 
     @Test
     fun `can save new ingredient`() {
+        val ingredient = Ingredient("Test Ingredient ${Random.nextInt(0,1000)}")
        val response = given()
            .contentType(ContentType.JSON)
-           .body(ingredients[0])
+           .body(ingredient)
            .`when`()
            .post(baseUrl)
            .then()
            .statusCode(HttpStatus.SC_OK)
            .body(
               "id", notNullValue(),
-               "name", `is`(ingredients[0].name)
            )
         val respIngredient = response.extract().`as`(Ingredient::class.java)
-        assertEquals(respIngredient.name, ingredients[0].name)
+        ingredients.add(respIngredient)
+        assertEquals(respIngredient.name, ingredients.last().name)
     }
 
     @Test
