@@ -18,9 +18,6 @@ class IngredientResourceTest {
     val baseUrl = "/ingredient"
     val ingredients: MutableList<Ingredient> = mutableListOf()
 
-    @Inject
-    lateinit var repo: IngredientRepository
-
     //    @BeforeEach
 //    fun mockIngredientRepository() {
 //        Mockito.`when`(repo.listAll()).thenReturn(ingredients)
