@@ -11,7 +11,8 @@ class Ingredient(
     @NotNull
     val name: String,
 
+) {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     var id: UUID? = null
-)
+}
