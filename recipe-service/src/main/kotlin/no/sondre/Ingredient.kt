@@ -9,7 +9,7 @@ import java.util.UUID
 class Ingredient(
 
     @NotNull
-    val name: String,
+    var name: String,
 
 ) {
     @Id

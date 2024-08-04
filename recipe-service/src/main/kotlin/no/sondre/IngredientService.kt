@@ -3,7 +3,7 @@ package no.sondre
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.inject.Inject
 import jakarta.transaction.Transactional
-import java.util.UUID
+import java.util.*
 
 @ApplicationScoped
 @Transactional
@@ -25,4 +25,9 @@ class IngredientService {
         return ingredient
     }
 
+    fun update(ingredient: Ingredient): Ingredient {
+        val old = load(ingredient.id)
+        old.name = ingredient.name
+        return old
+    }
 }

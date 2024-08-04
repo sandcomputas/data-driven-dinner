@@ -1,6 +1,7 @@
 package no.sondre
 
 import jakarta.inject.Inject
+import jakarta.ws.rs.BadRequestException
 import jakarta.ws.rs.GET
 import jakarta.ws.rs.POST
 import jakarta.ws.rs.PUT
@@ -31,7 +32,11 @@ class IngredientResource {
     }
 
     @PUT
-    fun update(ingredient: Ingredient): Ingredient {
-        TODO("Not implemented yet")
+    @Path("{id}")
+    fun update(@PathParam("id") id: UUID, ingredient: Ingredient): Ingredient {
+        if (id != ingredient.id) {
+            throw BadRequestException("Object with id: ${ingredient.id} cannot update resource with id: $id")
+        }
+        return service.update(ingredient)
     }
 }
