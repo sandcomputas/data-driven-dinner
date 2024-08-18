@@ -28,6 +28,10 @@ class Recipe (
         ingredients.add(i)
     }
 
+    fun loadIngredients(): List<RecipeIngredient> {
+        return ingredients.toList()
+    }
+
     fun complete() {
         ingredients.forEach {
             it.complete(id)

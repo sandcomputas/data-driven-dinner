@@ -4,6 +4,14 @@ This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
 
+## Testcontainers
+
+Some of the tests use test-containers to run, and a symlink is required to get that to work (at least on Mac):
+
+If using Docker: `sudo ln -s $HOME/.docker/run/docker.sock /var/run/docker.sock`
+
+If using Colima: `sudo ln -s $HOME/.colima/docker.sock /var/run/docker.sock`
+
 ## Running the application in dev mode
 
 You can run your application in dev mode that enables live coding using:

@@ -83,10 +83,10 @@ class RecipeResourceTest {
 
         // Watch out for the commonly used Recipe object in all the tests
         ingredients.forEach {
-            recipe.ingredients.add(RecipeIngredient(
+            recipe.addIngredient(RecipeIngredient(
                 amount = Random.nextInt(0, 1000),
                 unit = "freedom unit ${Random.nextInt(0, 1000)}",
-                ingredient = it.id!! // !! should be fine sine the ingredient is loaded from DB
+                ingredient = it.id
             ))
         }
 
@@ -100,9 +100,9 @@ class RecipeResourceTest {
         val respRecipe = response.extract().`as`(Recipe::class.java)
         assert(respRecipe.name == recipe.name) { "name must be same as name of input object"}
 
-        assert(respRecipe.ingredients.filter {
+        assert(respRecipe.loadIngredients().filter {
             it.recipe == respRecipe.id
-        }.size == recipe.ingredients.size) { "all added recipeIngredients must have been given a recipe ID that corresponds with the id of the Recipe" }
+        }.size == recipe.loadIngredients().size) { "all added recipeIngredients must have been given a recipe ID that corresponds with the id of the Recipe" }
     }
 
     @Test
