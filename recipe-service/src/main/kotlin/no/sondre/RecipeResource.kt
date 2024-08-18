@@ -1,11 +1,7 @@
 package no.sondre
 
 import jakarta.inject.Inject
-import jakarta.transaction.Transactional
-import jakarta.ws.rs.GET
-import jakarta.ws.rs.POST
-import jakarta.ws.rs.Path
-import jakarta.ws.rs.PathParam
+import jakarta.ws.rs.*
 import java.util.*
 
 @Path("recipe")
@@ -28,5 +24,14 @@ class RecipeResource {
     @POST
     fun save(recipe: Recipe): Recipe {
         return service.save(recipe)
+    }
+
+    @PUT
+    @Path("{id}")
+    fun update(@PathParam("id") id: UUID, recipe: Recipe): Recipe {
+        if (id != recipe.id) {
+            throw BadRequestException("Object with id: ${recipe.id} cannot update resource with id: $id")
+        }
+        return service.update(recipe)
     }
 }

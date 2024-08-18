@@ -27,4 +27,10 @@ class RecipeService {
         repo.persist(recipe)
         return recipe
     }
+
+    fun update(new: Recipe): Recipe {
+        val old = load(new.id)
+        old.update(new)
+        return old
+    }
 }

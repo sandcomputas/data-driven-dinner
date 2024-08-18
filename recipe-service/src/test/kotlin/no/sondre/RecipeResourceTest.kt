@@ -56,6 +56,16 @@ class RecipeResourceTest {
         return ingredients
     }
 
+    fun listRecipes(): List<Recipe> {
+        return given().contentType(ContentType.JSON)
+            .`when`()
+            .get(baseUrl)
+            .then()
+            .statusCode(200)
+            .extract()
+            .`as`(Array<Recipe>::class.java).toList()
+    }
+
     @Test
     fun `can save recipe without ingredients`() {
         val response = given()
@@ -108,13 +118,28 @@ class RecipeResourceTest {
     @Test
     fun `can list all recipes`() {
         `can save recipe without ingredients`()
-        val responseRecipes = given().contentType(ContentType.JSON)
-            .`when`()
-            .get(baseUrl)
-            .then()
-            .statusCode(200)
-            .extract()
-            .`as`(Array<Recipe>::class.java).toList()
+        val responseRecipes = listRecipes()
         assert(responseRecipes.isNotEmpty()) { "There should be a least one saved recipe" }
+    }
+
+    @Test
+    fun `can update recipe`() {
+        `can save recipe with ingredients`()
+        val recipe = listRecipes()[0]
+        val newName = "new name"
+        recipe.name = newName
+        recipe.addIngredient(RecipeIngredient(12345, "freedomUnit2", recipe.id, ingredients[0].id))
+
+        val response = given()
+            .contentType(ContentType.JSON)
+            .body(recipe)
+            .`when`()
+            .put(baseUrl + "/${recipe.id}")
+            .then()
+            .statusCode(HttpStatus.SC_OK)
+        val respRecipe = response.extract().`as`(Recipe::class.java)
+        assertEquals(respRecipe.name, newName)
+        val newIngredient = recipe.loadIngredients().filter { it.amount == 12345}
+        assert(newIngredient.size == 1)
     }
 }

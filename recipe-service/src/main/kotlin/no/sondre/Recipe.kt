@@ -9,7 +9,7 @@ import java.util.*
 class Recipe (
 
     @NotNull
-    val name: String,
+    var name: String,
 
     // TODO: not sure about the cascade option...
     //   I believe None is the correct option but need to test...
@@ -36,5 +36,11 @@ class Recipe (
         ingredients.forEach {
             it.complete(id)
         }
+    }
+
+    fun update(new: Recipe) {
+        name = new.name
+        ingredients.clear()
+        ingredients.addAll(new.ingredients)
     }
 }
