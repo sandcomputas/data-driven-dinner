@@ -1,0 +1,7 @@
+<p>overview works!</p>
+
+@for (r of recipes; track r.id) {
+    <li> {{ r.name }} | {{ r.id }} </li>
+} @empty {
+    no recipes found
+}
