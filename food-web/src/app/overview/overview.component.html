@@ -1,7 +1,13 @@
 <p>overview works!</p>
 
-@for (r of recipes; track r.id) {
-    <li> {{ r.name }} | {{ r.id }} </li>
-} @empty {
-    no recipes found
-}
+<div class="container" fxLayout="row" fxLayoutGap="20px">
+    @for (r of recipes; track r.id) {
+        <!--        <div>hei</div>-->
+        <div fxFlex="20%">
+            <app-recipe-box [recipe]="r"/>
+        </div>
+    } @empty {
+        Loading...
+    }
+
+</div>
