@@ -2,10 +2,7 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$/food-web">
-      <excludeFolder url="file://$MODULE_DIR$/food-web/dist" />
-      <excludeFolder url="file://$MODULE_DIR$/food-web/tmp" />
-    </content>
+    <content url="file://$MODULE_DIR$/food-web" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
