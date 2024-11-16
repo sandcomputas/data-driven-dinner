@@ -1,14 +1,16 @@
 import * as React from 'react'
-import { createFileRoute } from '@tanstack/react-router'
+import {createFileRoute} from '@tanstack/react-router'
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
 export const Route = createFileRoute('/')({
-  component: HomeComponent,
+    component: HomeComponent,
 })
 
+
 function HomeComponent() {
-  return (
-    <div className="p-2">
-      <h3>Welcome Home!</h3>
-    </div>
-  )
+    return (
+        <div className="p-2">
+            <h3>Welcome Home!</h3>
+        </div>
+    )
 }
