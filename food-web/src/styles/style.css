@@ -1,0 +1,10 @@
+body {
+    font-family: "Open Sans", Arial, sans-serif;
+    color: black;
+}
+
+a,
+button {
+    font-family: inherit;
+    color: black;
+}

@@ -1,4 +1,3 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {RouterProvider, createRouter} from '@tanstack/react-router'
 import {routeTree} from './routeTree.gen'
@@ -16,6 +15,8 @@ declare module '@tanstack/react-router' {
         router: typeof router
     }
 }
+
+import "./index.css"
 
 const rootElement = document.getElementById('app')!
 

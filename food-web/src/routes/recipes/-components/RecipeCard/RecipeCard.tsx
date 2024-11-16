@@ -1,5 +1,6 @@
 import {FC} from "react";
 import styles from "./RecipeCard.module.css";
+import {Link} from "@tanstack/react-router";
 
 
 interface Props {
@@ -8,11 +9,11 @@ interface Props {
 
 const RecipeCard: FC<Props> = ({recipe}) => {
     return (
-        <div
+        <Link
             className={styles['recipe-card']}
         >
             <div>{recipe.id} | {recipe.name}</div>
-        </div>
+        </Link>
 
     )
 }
