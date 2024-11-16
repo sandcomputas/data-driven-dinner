@@ -16,7 +16,7 @@ const RecipeList: FC = () => {
     return (
         <div className={styles['recipe-list']}>
             {data.map((r) => (
-                <div>
+                <div key={r.id}>
                     <RecipeCard recipe={r}/>
                 </div>
             ))}
