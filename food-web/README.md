@@ -1,4 +1,4 @@
 # Food Web
 
-Start development server: `bun run dev`
+Start development server: `npm run dev`
 
