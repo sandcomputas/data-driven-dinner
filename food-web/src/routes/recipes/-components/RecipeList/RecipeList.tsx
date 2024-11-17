@@ -5,7 +5,7 @@ import styles from './RecipeList.module.css'
 
 const RecipeList: FC = () => {
     const {isPending, error, data, isFetching} = useQuery<Recipe[]>({
-        queryKey: ['data'],
+        queryKey: ['recipes'],
         queryFn: async (): Promise<Recipe[]> => {
             return fetch('http://localhost:8080/recipe').then((res) => res.json())
         },

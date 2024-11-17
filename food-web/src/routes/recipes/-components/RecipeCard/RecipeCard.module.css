@@ -5,16 +5,13 @@
     padding: 16px;
     text-align: center;
     transition: transform 0.2s, box-shadow 0.2s;
-
-
-
-    outline: 0.5px solid black;
-
-    background-color: papayawhip;
+    outline: 0.5px solid gray;
+    background-color: var(--cream);
 }
 
 .recipe-card:hover {
-    background-color: gray;
+    background-color: var(--cream-darker);
+    transform: translate(0px, -3px)
 }
 
 .recipe-card:active {
