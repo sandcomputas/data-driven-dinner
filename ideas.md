@@ -3,7 +3,7 @@
 
 ## Concrete TODOs
 
-- [ ] Youtube link (inline video)
+- [x] Youtube link (inline video)
 - [ ] Be able to create, list, edit and delete ingredients
 - [ ] Be able to create, list, edit and delete recipes
 

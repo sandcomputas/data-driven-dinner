@@ -4,7 +4,6 @@ export const Route = createFileRoute('/')({
     component: HomeComponent,
 })
 
-
 function HomeComponent() {
     return (
         <div className="p-2">
