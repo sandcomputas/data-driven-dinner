@@ -5,6 +5,7 @@
 
 - [x] Youtube link (inline video)
 - [ ] Be able to create, list, edit and delete ingredients
+  - Use TanStack Form for this! 
 - [ ] Be able to create, list, edit and delete recipes
 
 - [ ] Add links to recipe (video or article)
