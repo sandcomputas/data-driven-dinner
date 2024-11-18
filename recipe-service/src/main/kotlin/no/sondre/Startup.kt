@@ -28,11 +28,11 @@ class Startup {
             Ingredient("ingredient two")
         )
         val recipes = listOf(
-            Recipe("recipe one", mutableListOf()),
-            Recipe("recipe two", mutableListOf()),
-            Recipe("recipe three", mutableListOf()),
-            Recipe("recipe four", mutableListOf()),
-            Recipe("recipe five", mutableListOf())
+            Recipe("recipe one", youtube = "https://www.youtube.com/watch?v=JYg1UfVCfiw", ingredients = mutableListOf()),
+            Recipe("recipe two", ingredients = mutableListOf()),
+            Recipe("recipe three", ingredients = mutableListOf()),
+            Recipe("recipe four", ingredients = mutableListOf()),
+            Recipe("recipe five", ingredients = mutableListOf())
         )
         // Save initial recipe without ingredient (what we will have to do in the service)
         recipeRepository.persist(recipes)

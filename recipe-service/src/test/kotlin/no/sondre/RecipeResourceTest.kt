@@ -17,7 +17,7 @@ class RecipeResourceTest {
         Ingredient("ingredient two")
     )
 
-    private final val recipe = Recipe("recipe one", mutableListOf())
+    private final val recipe = Recipe("recipe one", ingredients = mutableListOf())
 
     fun assureIngredientsExists() {
         val savedIngredients = given().contentType(ContentType.JSON)
@@ -93,11 +93,13 @@ class RecipeResourceTest {
 
         // Watch out for the commonly used Recipe object in all the tests
         ingredients.forEach {
-            recipe.addIngredient(RecipeIngredient(
-                amount = Random.nextInt(0, 1000),
-                unit = "freedom unit ${Random.nextInt(0, 1000)}",
-                ingredient = it.id
-            ))
+            recipe.addIngredient(
+                RecipeIngredient(
+                    amount = Random.nextInt(0, 1000),
+                    unit = "freedom unit ${Random.nextInt(0, 1000)}",
+                    ingredient = it.id
+                )
+            )
         }
 
         val response = given()
@@ -108,7 +110,7 @@ class RecipeResourceTest {
             .then()
             .statusCode(HttpStatus.SC_OK)
         val respRecipe = response.extract().`as`(Recipe::class.java)
-        assert(respRecipe.name == recipe.name) { "name must be same as name of input object"}
+        assert(respRecipe.name == recipe.name) { "name must be same as name of input object" }
 
         assert(respRecipe.loadIngredients().filter {
             it.recipe == respRecipe.id
@@ -139,7 +141,7 @@ class RecipeResourceTest {
             .statusCode(HttpStatus.SC_OK)
         val respRecipe = response.extract().`as`(Recipe::class.java)
         assertEquals(respRecipe.name, newName)
-        val newIngredient = recipe.loadIngredients().filter { it.amount == 12345}
+        val newIngredient = recipe.loadIngredients().filter { it.amount == 12345 }
         assert(newIngredient.size == 1)
     }
 }

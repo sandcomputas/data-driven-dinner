@@ -8,8 +8,9 @@ import java.util.*
 @Table(name = "recipes")
 class Recipe (
 
-    @NotNull
     var name: String,
+
+    var youtube: String? = null,
 
     // TODO: not sure about the cascade option...
     //   I believe None is the correct option but need to test...
