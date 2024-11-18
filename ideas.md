@@ -3,9 +3,7 @@
 
 ## Concrete TODOs
 
-- [X] API - enable update of ingredient
-- [X] API - enable update of recipe
-- [ ] Get started on frontend (Angular)
+- [ ] Youtube link (inline video)
 - [ ] Be able to create, list, edit and delete ingredients
 - [ ] Be able to create, list, edit and delete recipes
 
