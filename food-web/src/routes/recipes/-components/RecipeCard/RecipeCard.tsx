@@ -1,7 +1,9 @@
 import {FC} from "react";
+// @ts-ignore
 import styles from "./RecipeCard.module.css";
 import {Link} from "@tanstack/react-router";
-import image from "../../../../assets/generic_food.png"
+// @ts-ignore
+import image from "@/assets/generic_food.png"
 
 
 interface Props {

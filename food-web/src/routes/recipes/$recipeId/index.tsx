@@ -1,17 +1,11 @@
 import {createFileRoute} from '@tanstack/react-router'
 import {useQuery} from "@tanstack/react-query";
 
-interface Params {
-    recipeId: string;
-}
-
 export const Route = createFileRoute('/recipes/$recipeId/')({
-    component: RouteComponent,
-    // loader: async ({params}: { params: Params }) => {
-
+    component: RecipeId,
 })
 
-function RouteComponent() {
+function RecipeId() {
     const {recipeId} = Route.useParams()
     const {isPending, error, data, isFetching} = useQuery<Recipe>({
         queryKey: ['recipe'],
