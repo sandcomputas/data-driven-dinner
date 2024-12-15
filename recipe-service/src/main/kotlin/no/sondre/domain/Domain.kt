@@ -1,15 +1,9 @@
 package no.sondre.domain
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import no.sondre.InternalError
 import java.util.*
 
 abstract class Domain {
-    // TODO: this should not be handled with annotation
-    //   should be a way to customize Jackson/OpenAPI
-    //   but it seems like the issue is that Kotlin generates
-    //   getters and setters automatically, which OpenAPI then reads
-//    @JsonIgnore
     private lateinit var _id: UUID
 
     val id: UUID
@@ -23,7 +17,6 @@ abstract class Domain {
         _id = UUID.randomUUID()
     }
 
-//    @get:JsonIgnore
     private val hasId: Boolean
         get() = this::_id.isInitialized
 
