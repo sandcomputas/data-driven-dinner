@@ -11,6 +11,8 @@ import no.sondre.domain.Recipe
 import no.sondre.domain.RecipeIngredient
 import no.sondre.repository.IngredientRepository
 import no.sondre.repository.RecipeRepository
+import no.sondre.repository.SQLIngredient
+import java.util.*
 import java.util.logging.Logger
 
 @IfBuildProfile("dev")
@@ -29,8 +31,8 @@ class Startup {
     fun injectTestData(@Observes event: StartupEvent) {
         logger.info("Injecting some test data")
         val ingredients = listOf(
-            Ingredient("ingredient one"),
-            Ingredient("ingredient two")
+            SQLIngredient(UUID.randomUUID(), "ingredient one"),
+            SQLIngredient(UUID.randomUUID(), "ingredient two")
         )
         val recipes = listOf(
             Recipe("recipe one", youtube = "https://www.youtube.com/watch?v=JYg1UfVCfiw", ingredients = mutableListOf()),

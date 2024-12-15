@@ -12,10 +12,10 @@ import java.util.*
 class IngredientService {
 
     @Inject
-    lateinit var repo: IngredientRepository
+    private lateinit var repo: IngredientRepository
 
     fun list(): List<Ingredient> {
-        return repo.listAll()
+        return repo.all()
     }
 
     fun load(id: UUID): Ingredient {
@@ -23,8 +23,7 @@ class IngredientService {
     }
 
     fun save(ingredient: Ingredient): Ingredient {
-        repo.persist(ingredient)
-        return ingredient
+        return repo.save(ingredient)
     }
 
     fun update(ingredient: Ingredient): Ingredient {

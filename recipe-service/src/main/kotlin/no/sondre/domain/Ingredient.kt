@@ -1,17 +1,3 @@
 package no.sondre.domain
 
-import jakarta.persistence.*
-import jakarta.validation.constraints.NotNull
-import java.util.UUID
-
-@Entity
-@Table(name = "ingredients")
-class Ingredient(
-
-    @NotNull
-    var name: String,
-
-) {
-    @Id
-    var id: UUID = UUID.randomUUID()
-}
+class Ingredient(var name: String) : Domain()
