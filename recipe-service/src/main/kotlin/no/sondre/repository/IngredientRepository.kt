@@ -1,9 +1,10 @@
-package no.sondre
+package no.sondre.repository
 
 import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepository
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.transaction.Transactional
 import jakarta.ws.rs.NotFoundException
+import no.sondre.domain.Ingredient
 import java.util.UUID
 
 @ApplicationScoped

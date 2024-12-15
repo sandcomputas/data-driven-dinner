@@ -5,7 +5,7 @@
 
 - [x] Youtube link (inline video)
 - [ ] Be able to create, list, edit and delete ingredients
-  - Use TanStack Form for this! 
+  - Use TanStack Form for this!
 - [ ] Be able to create, list, edit and delete recipes
 
 - [ ] Add links to recipe (video or article)
@@ -29,6 +29,7 @@ In the future (when a basic frontend is working):
 
 - Recipe types: dinner, side dish, salad <- these can be related so that we can choose between different salads for one dinner f.example.
 
+- Search like Spotlight on Mac and ChatGPT search
 
 
 - AI feature that makes you able to ask about what to eat, and the dishes in the application should be used as a basis for answering

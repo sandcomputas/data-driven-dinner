@@ -1,7 +1,9 @@
-package no.sondre
+package no.sondre.resources
 
 import jakarta.inject.Inject
 import jakarta.ws.rs.*
+import no.sondre.services.RecipeService
+import no.sondre.domain.Recipe
 import java.util.*
 
 @Path("recipe")
@@ -23,7 +25,7 @@ class RecipeResource {
 
     @POST
     fun save(recipe: Recipe): Recipe {
-        return service.save(recipe)
+        return service.new(recipe)
     }
 
     @PUT

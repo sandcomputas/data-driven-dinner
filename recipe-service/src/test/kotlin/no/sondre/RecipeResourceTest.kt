@@ -3,6 +3,9 @@ package no.sondre
 import io.quarkus.test.junit.QuarkusTest
 import io.restassured.RestAssured.*
 import io.restassured.http.ContentType
+import no.sondre.domain.Ingredient
+import no.sondre.domain.Recipe
+import no.sondre.domain.RecipeIngredient
 import org.apache.http.HttpStatus
 import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.Assertions.assertEquals

@@ -6,6 +6,11 @@ import jakarta.enterprise.context.ApplicationScoped
 import jakarta.enterprise.event.Observes
 import jakarta.inject.Inject
 import jakarta.transaction.Transactional
+import no.sondre.domain.Ingredient
+import no.sondre.domain.Recipe
+import no.sondre.domain.RecipeIngredient
+import no.sondre.repository.IngredientRepository
+import no.sondre.repository.RecipeRepository
 import java.util.logging.Logger
 
 @IfBuildProfile("dev")

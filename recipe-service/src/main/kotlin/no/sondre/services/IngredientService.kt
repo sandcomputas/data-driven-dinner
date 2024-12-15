@@ -1,8 +1,10 @@
-package no.sondre
+package no.sondre.services
 
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.inject.Inject
 import jakarta.transaction.Transactional
+import no.sondre.repository.IngredientRepository
+import no.sondre.domain.Ingredient
 import java.util.*
 
 @ApplicationScoped

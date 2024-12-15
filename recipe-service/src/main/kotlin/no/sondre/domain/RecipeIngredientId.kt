@@ -1,4 +1,4 @@
-package no.sondre
+package no.sondre.domain
 
 import jakarta.persistence.Embeddable
 import java.io.Serializable

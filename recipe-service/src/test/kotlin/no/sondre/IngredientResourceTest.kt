@@ -3,7 +3,7 @@ package no.sondre
 import io.quarkus.test.junit.QuarkusTest
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
-import jakarta.inject.Inject
+import no.sondre.domain.Ingredient
 import org.apache.http.HttpStatus
 import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.Assertions.assertEquals

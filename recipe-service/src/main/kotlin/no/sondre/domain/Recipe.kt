@@ -1,7 +1,6 @@
-package no.sondre
+package no.sondre.domain
 
 import jakarta.persistence.*
-import jakarta.validation.constraints.NotNull
 import java.util.*
 
 @Entity
@@ -17,7 +16,7 @@ class Recipe (
     @OneToMany(mappedBy = "recipe", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.EAGER)
     val ingredients: MutableList<RecipeIngredient> = mutableListOf(),
 
-) {
+    ) {
     @Id
     val id: UUID = UUID.randomUUID()
 

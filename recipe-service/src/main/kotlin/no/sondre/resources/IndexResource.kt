@@ -1,4 +1,4 @@
-package no.sondre
+package no.sondre.resources
 
 import jakarta.ws.rs.GET
 import jakarta.ws.rs.Path
