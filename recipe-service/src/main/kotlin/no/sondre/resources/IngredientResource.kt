@@ -1,18 +1,21 @@
 package no.sondre.resources
 
 import jakarta.inject.Inject
-import jakarta.ws.rs.BadRequestException
-import jakarta.ws.rs.GET
-import jakarta.ws.rs.POST
-import jakarta.ws.rs.PUT
-import jakarta.ws.rs.Path
-import jakarta.ws.rs.PathParam
-import no.sondre.services.IngredientService
+import jakarta.ws.rs.*
+import jakarta.ws.rs.core.Response
 import no.sondre.domain.Ingredient
+import no.sondre.services.IngredientService
+import org.jboss.resteasy.reactive.RestResponse
+import org.jboss.resteasy.reactive.server.ServerExceptionMapper
 import java.util.*
 
 @Path("ingredient")
 class IngredientResource {
+
+    @ServerExceptionMapper
+    fun mapException(e: Exception): RestResponse<String> {
+        return RestResponse.status(Response.Status.NOT_FOUND, e.message)
+    }
 
     @Inject
     lateinit var service: IngredientService

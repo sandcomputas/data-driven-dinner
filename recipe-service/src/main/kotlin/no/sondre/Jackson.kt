@@ -11,7 +11,6 @@ import org.eclipse.microprofile.openapi.models.media.Schema
 @Priority(1)
 @ApplicationScoped
 class CustomOpenAPIFilter : OASFilter {
-    //
     override fun filterSchema(schema: Schema?): Schema? {
         val properties = schema?.properties
         if (properties != null) {

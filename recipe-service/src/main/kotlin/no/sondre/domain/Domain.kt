@@ -1,6 +1,6 @@
 package no.sondre.domain
 
-import no.sondre.InternalError
+import jakarta.ws.rs.InternalServerErrorException
 import java.util.*
 
 abstract class Domain {
@@ -22,13 +22,13 @@ abstract class Domain {
 
     private fun assertId() {
         if (!hasId) {
-            throw InternalError("No id set on object")
+            throw InternalServerErrorException("No id set on object")
         }
     }
 
     private fun assertNoId() {
         if (hasId) {
-            throw InternalError("Id already set on object")
+            throw InternalServerErrorException("Id already set on object")
         }
     }
 
