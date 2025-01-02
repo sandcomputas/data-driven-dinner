@@ -3,6 +3,7 @@ package no.sondre.domain
 import jakarta.ws.rs.InternalServerErrorException
 import java.util.*
 
+@NoArg
 abstract class Domain {
     private lateinit var _id: UUID
 

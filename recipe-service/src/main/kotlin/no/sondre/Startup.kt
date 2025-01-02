@@ -9,6 +9,7 @@ import jakarta.transaction.Transactional
 import no.sondre.domain.Ingredient
 import no.sondre.domain.Recipe
 import no.sondre.domain.RecipeIngredient
+import no.sondre.domain.SQLRecipe
 import no.sondre.repository.IngredientRepository
 import no.sondre.repository.RecipeRepository
 import no.sondre.repository.SQLIngredient
@@ -20,10 +21,10 @@ import java.util.logging.Logger
 class Startup {
 
     @Inject
-    lateinit var ingredientRepository: IngredientRepository
+    private lateinit var ingredientRepository: IngredientRepository
 
     @Inject
-    lateinit var recipeRepository: RecipeRepository
+    private lateinit var recipeRepository: RecipeRepository
 
     private val logger = Logger.getLogger("Startup logger")
 
@@ -35,18 +36,18 @@ class Startup {
             SQLIngredient(UUID.randomUUID(), "ingredient two")
         )
         val recipes = listOf(
-            Recipe("recipe one", youtube = "https://www.youtube.com/watch?v=JYg1UfVCfiw", ingredients = mutableListOf()),
-            Recipe("recipe two", ingredients = mutableListOf()),
-            Recipe("recipe three", ingredients = mutableListOf()),
-            Recipe("recipe four", ingredients = mutableListOf()),
-            Recipe("recipe five", ingredients = mutableListOf())
+            SQLRecipe(UUID.randomUUID(), "recipe one", youtube = "https://www.youtube.com/watch?v=JYg1UfVCfiw", ingredients = mutableListOf()),
+            SQLRecipe(UUID.randomUUID(),"recipe two", ingredients = mutableListOf()),
+            SQLRecipe(UUID.randomUUID(), "recipe three", ingredients = mutableListOf()),
+            SQLRecipe(UUID.randomUUID(), "recipe four", ingredients = mutableListOf()),
+            SQLRecipe(UUID.randomUUID(), "recipe five", ingredients = mutableListOf())
         )
         // Save initial recipe without ingredient (what we will have to do in the service)
         recipeRepository.persist(recipes)
         ingredientRepository.persist(ingredients)
-        recipes.forEach { r ->
-            r.addIngredient(RecipeIngredient(100, "dl", r.id, ingredient = ingredients[0].id))
-            r.addIngredient(RecipeIngredient(100, "dl", r.id, ingredient = ingredients[1].id))
-        }
+//        recipes.forEach { r ->
+//            r.addIngredient(RecipeIngredient(100, "dl", r.id, ingredient = ingredients[0].id))
+//            r.addIngredient(RecipeIngredient(100, "dl", r.id, ingredient = ingredients[1].id))
+//        }
     }
 }

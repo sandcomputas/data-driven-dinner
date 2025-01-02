@@ -29,33 +29,28 @@ class IngredientResourceTest {
 
     @Test
     fun `can save new ingredient`() {
-        val ingredient = """{
-            |"id": ${UUID.randomUUID()},
-            |"name": "Test Ingredient: ${Random.nextInt(0, 100_000)}"
-            |}""".trimMargin()
-//        val ingredient = Ingredient("Test Ingredient ${Random.nextInt(0, 1000)}")
+        val ingredientMap = mutableMapOf<String, String>()
+        ingredientMap["name"] = "Test Ingredient: ${Random.nextInt(0, 100_000)}"
         val response = given()
             .contentType(ContentType.JSON)
-            .body(ingredient)
+            .body(ingredientMap)
             .`when`()
             .post(baseUrl)
-        println()
-//            .then()
-//            .statusCode(HttpStatus.SC_OK)
-//            .body(
-//                "id", notNullValue(),
-//            )
-//        val respIngredient = response.extract().`as`(Ingredient::class.java)
-//        ingredients.add(respIngredient)
-//        assertEquals(respIngredient.name, ingredients.last().name)
+            .then()
+            .statusCode(HttpStatus.SC_OK)
+            .body(
+                "id", notNullValue(),
+            )
+        val respIngredient = response.extract().`as`(Ingredient::class.java)
+        assertEquals(respIngredient.name, ingredientMap["name"])
     }
 
     @Test
     fun `can list all ingredients`() {
         val saves = 3
-        for (i in 1..saves) {
-            `can save new ingredient`()
-        }
+//        for (i in 1..saves) {
+//            `can save new ingredient`()
+//        }
         val responseIngredients = given().contentType(ContentType.JSON)
             .`when`()
             .get(baseUrl)

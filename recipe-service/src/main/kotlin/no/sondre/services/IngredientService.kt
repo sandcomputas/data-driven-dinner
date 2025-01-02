@@ -23,6 +23,7 @@ class IngredientService {
     }
 
     fun save(ingredient: Ingredient): Ingredient {
+        ingredient.initNew()
         return repo.save(ingredient)
     }
 

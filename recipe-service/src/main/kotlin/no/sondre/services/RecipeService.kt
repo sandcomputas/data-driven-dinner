@@ -11,10 +11,10 @@ import java.util.*
 class RecipeService {
 
     @Inject
-    lateinit var repo: RecipeRepository
+    private lateinit var repo: RecipeRepository
 
     fun list(): List<Recipe> {
-        return repo.listAll()
+        return repo.all()
     }
 
     fun load(id: UUID): Recipe {
@@ -26,7 +26,7 @@ class RecipeService {
             throw BadRequestException("Recipe with id: ${recipe.id} already exists")
         }
         recipe.complete()
-        repo.persist(recipe)
+        repo.save(recipe)
         return recipe
     }
 
