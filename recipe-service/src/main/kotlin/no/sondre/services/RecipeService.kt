@@ -22,16 +22,14 @@ class RecipeService {
     }
 
     fun new(recipe: Recipe): Recipe {
-        if (repo.findById(recipe.id) != null) {
-            throw BadRequestException("Recipe with id: ${recipe.id} already exists")
-        }
+        recipe.initNew()
         recipe.complete()
         repo.save(recipe)
         return recipe
     }
 
     fun update(new: Recipe): Recipe {
-        val old = load(new.id)
+        val old = load(new.idSafe())
         old.update(new)
         return old
     }

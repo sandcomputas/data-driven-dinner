@@ -1,27 +1,27 @@
 package no.sondre.domain
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import jakarta.ws.rs.InternalServerErrorException
 import java.util.*
 
 @NoArg
 abstract class Domain {
-    private lateinit var _id: UUID
-
-    val id: UUID
-        get() {
-            assertId()
-            return _id
-        }
+    var id: UUID? = null
 
     fun initNew() {
         assertNoId()
-        _id = UUID.randomUUID()
+        id = UUID.randomUUID()
     }
 
     private val hasId: Boolean
-        get() = this::_id.isInitialized
+        get() = id != null
 
-    private fun assertId() {
+    fun idSafe(): UUID {
+        assertId()
+        return id!!
+    }
+
+    fun assertId() {
         if (!hasId) {
             throw InternalServerErrorException("No id set on object")
         }
@@ -34,6 +34,6 @@ abstract class Domain {
     }
 
     fun withId(id: UUID) {
-        if (!hasId) this._id = id
+        if (!hasId) this.id = id
     }
 }

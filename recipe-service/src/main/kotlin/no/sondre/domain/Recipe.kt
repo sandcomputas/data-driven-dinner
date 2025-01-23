@@ -49,7 +49,7 @@ class SQLRecipe(
 ) : SQLModel<Recipe> {
     companion object : SQLModelCreator<Recipe, SQLRecipe> {
         override fun fromPOJO(pojo: Recipe): SQLRecipe {
-            return SQLRecipe(pojo.id, pojo.name, pojo.youtube, pojo.ingredients)
+            return SQLRecipe(pojo.idSafe(), pojo.name, pojo.youtube, pojo.ingredients)
         }
     }
 

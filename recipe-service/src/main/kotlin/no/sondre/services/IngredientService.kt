@@ -28,7 +28,7 @@ class IngredientService {
     }
 
     fun update(ingredient: Ingredient): Ingredient {
-        val old = load(ingredient.id)
+        val old = load(ingredient.idSafe())
         old.name = ingredient.name
         return old
     }

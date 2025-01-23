@@ -15,7 +15,7 @@ class IngredientResource {
     @ServerExceptionMapper
     fun mapException(e: Exception): RestResponse<String> {
         // TODO: all exceptions are now mapped to not found, this should not be the case
-        return RestResponse.status(Response.Status.NOT_FOUND, e.message)
+        return RestResponse.status(Response.Status.INTERNAL_SERVER_ERROR, e.message)
     }
 
     @Inject

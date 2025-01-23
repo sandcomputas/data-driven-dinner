@@ -19,7 +19,8 @@ class SQLIngredient(
 ) : SQLModel<Ingredient> {
     companion object : SQLModelCreator<Ingredient, SQLIngredient> {
         override fun fromPOJO(pojo: Ingredient): SQLIngredient {
-            return SQLIngredient(pojo.id, pojo.name)
+            pojo.assertId()
+            return SQLIngredient(pojo.idSafe(), pojo.name)
         }
     }
 
