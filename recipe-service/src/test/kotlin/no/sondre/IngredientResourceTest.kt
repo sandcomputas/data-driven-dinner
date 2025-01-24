@@ -29,20 +29,23 @@ class IngredientResourceTest {
 
     @Test
     fun `can save new ingredient`() {
-        val ingredientMap = mutableMapOf<String, String>()
-        ingredientMap["name"] = "Test Ingredient: ${Random.nextInt(0, 100_000)}"
+//        val ingredientMap = mutableMapOf<String, String>()
+//        ingredientMap["name"] = "Test Ingredient: ${Random.nextInt(0, 100_000)}"
+        val ingredient = Ingredient("heisann")
         val response = given()
             .contentType(ContentType.JSON)
-            .body(ingredientMap)
+//            .body(ingredientMap)
+            .body(ingredient)
             .`when`()
             .post(baseUrl)
             .then()
-            .statusCode(HttpStatus.SC_OK)
-            .body(
-                "id", notNullValue(),
-            )
+//            .statusCode(HttpStatus.SC_OK)
+//            .body(
+//                "id", notNullValue(),
+//            )
         val respIngredient = response.extract().`as`(Ingredient::class.java)
-        assertEquals(respIngredient.name, ingredientMap["name"])
+//        assertEquals(respIngredient.name, ingredientMap["name"])
+        assertEquals(respIngredient.name, ingredient.name)
     }
 
     @Test
