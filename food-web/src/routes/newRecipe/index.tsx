@@ -10,15 +10,16 @@ function NewRecipe() {
 
     const form = useForm({
         defaultValues: {
-            name: ""
+            name: "",
+            youtube: ""
         },
         onSubmit: ({value}) => {
-            console.log(value.name)
+            console.log(value.name, value.youtube)
             mutation.mutate(
                 {
                     id: null,
                     name: value.name,
-                    youtube: null,
+                    youtube: value.youtube,
                     ingredients: []
                 }
             )
@@ -42,7 +43,6 @@ function NewRecipe() {
                     <div>
                         <label>Tittel</label>
                         <input
-                            id="tittel"
                             type="text"
                             value={field.state.value}
                             onChange={(e) => field.handleChange(e.target.value)}
@@ -50,6 +50,20 @@ function NewRecipe() {
                     </div>
                 )}
             />
+            <form.Field
+                name="youtube"
+                children={(field) => (
+                    <div>
+                        <label>YouTube Link</label>
+                        <input
+                            type="text"
+                            value={field.state.value}
+                            onChange={(e) => field.handleChange(e.target.value)}
+                        />
+                    </div>
+                )}
+            />
+
             <button onClick={form.handleSubmit}>Lagre</button>
         </div>
     )
