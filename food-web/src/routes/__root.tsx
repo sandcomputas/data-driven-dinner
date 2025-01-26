@@ -15,7 +15,8 @@ function RootComponent() {
             <div className={styles["header-row-container"]}>
                 <div className={styles["leftItems"]}>
                     <Link to="/">Home</Link>{' '}
-                    <Link to="/recipes">Oppskrifter</Link>
+                    <Link to="/recipes">Oppskrifter</Link>{' '}
+                    <Link to="/resources">Resources[coming]</Link>
                 </div>
                 <div className={styles["rightItems"]}>
                     <Link to="/newRecipe">Ny oppskrift</Link>
