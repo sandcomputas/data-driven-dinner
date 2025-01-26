@@ -4,6 +4,10 @@ This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
 
+## Repository pattern
+
+https://quarkus.io/guides/hibernate-orm-panache#solution-2-using-the-repository-pattern
+
 ## Testcontainers
 
 Some of the tests use test-containers to run, and a symlink is required to get that to work (at least on Mac):
