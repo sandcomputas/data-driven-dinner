@@ -16,7 +16,7 @@ function RootComponent() {
                 <div className={styles["leftItems"]}>
                     <Link to="/">Home</Link>{' '}
                     <Link to="/recipes">Oppskrifter</Link>{' '}
-                    <Link to="/resources">Resources[coming]</Link>
+                    <Link to="/inspiration">Inspirasjon</Link>
                 </div>
                 <div className={styles["rightItems"]}>
                     <Link to="/newRecipe">Ny oppskrift</Link>
