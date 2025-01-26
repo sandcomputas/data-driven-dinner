@@ -15,7 +15,7 @@ import java.util.UUID
 class SQLIngredient(
     @Id
     val id: UUID,
-    val name: String
+    var name: String
 ) : SQLModel<Ingredient> {
     companion object : SQLModelCreator<Ingredient, SQLIngredient> {
         override fun fromPOJO(pojo: Ingredient): SQLIngredient {
@@ -29,6 +29,10 @@ class SQLIngredient(
         pojo.withId(id)
         return pojo
     }
+
+    override fun update(new: Ingredient) {
+        name = new.name
+    }
 }
 
 @ApplicationScoped
@@ -36,8 +40,12 @@ class SQLIngredient(
 // TODO: vurder å bruke komposisjon i stedet for arv her. Dvs. at vi heller injecter PanacheRepo. Det vil gjøre dette interfacet mye simplere for servicen. Siden den slipper å få masse metoder som returnerer SQL versjon av objektetet
 class IngredientRepository : PanacheRepository<SQLIngredient> {
     fun findByIdOrThrow(id: UUID): Ingredient {
-        val sql = find("id", id).firstResult() ?: throw NotFoundException("Recipe with ID $id not found")
+        val sql = findSQLByIdOrThrow(id)
         return sql.toPOJO()
+    }
+
+    private fun findSQLByIdOrThrow(id: UUID): SQLIngredient {
+        return find("id", id).firstResult() ?: throw NotFoundException("Ingredient with ID $id not found")
     }
 
     fun all(): List<Ingredient> {
@@ -48,5 +56,11 @@ class IngredientRepository : PanacheRepository<SQLIngredient> {
         val sql = SQLIngredient.fromPOJO(ingredient)
         persist(sql)
         return ingredient
+    }
+
+    fun update(new: Ingredient): Ingredient {
+        val current = findSQLByIdOrThrow(new.idSafe())
+        current.update(new)
+        return current.toPOJO()
     }
 }

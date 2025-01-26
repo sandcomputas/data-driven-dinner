@@ -27,9 +27,7 @@ class IngredientService {
         return repo.save(ingredient)
     }
 
-    fun update(ingredient: Ingredient): Ingredient {
-        val old = load(ingredient.idSafe())
-        old.name = ingredient.name
-        return old
+    fun update(new: Ingredient): Ingredient {
+        return repo.update(new)
     }
 }

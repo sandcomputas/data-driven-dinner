@@ -16,13 +16,12 @@ class RecipeRepository : PanacheRepository<SQLRecipe> {
         return listAll().map { it.toPOJO() }
     }
 
-    fun findById(id: UUID): Recipe? {
-        val r = find("id", id).firstResult()
-        return r?.toPOJO()
+    private fun findSQLByIdOrThrow(id: UUID): SQLRecipe {
+        return find("id", id).firstResult() ?: throw NotFoundException("Recipe with ID $id not found")
     }
 
     fun findByIdOrThrow(id: UUID): Recipe {
-        return findById(id) ?: throw NotFoundException("Recipe with ID $id not found")
+        return findSQLByIdOrThrow(id).toPOJO()
     }
 
     fun save(recipe: Recipe) {
@@ -31,5 +30,11 @@ class RecipeRepository : PanacheRepository<SQLRecipe> {
 
     fun save(recipes: List<Recipe>) {
         recipes.forEach { save(it) }
+    }
+
+    fun update(new: Recipe): Recipe {
+        val current = findSQLByIdOrThrow(new.idSafe())
+        current.update(new)
+        return current.toPOJO()
     }
 }

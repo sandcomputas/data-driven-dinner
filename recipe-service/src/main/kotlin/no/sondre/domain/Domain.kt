@@ -1,8 +1,13 @@
 package no.sondre.domain
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.databind.ObjectMapper
 import jakarta.ws.rs.InternalServerErrorException
 import java.util.*
+
+fun Domain.toJsonString(objectMapper: ObjectMapper): String {
+    val printer = objectMapper.writer().withDefaultPrettyPrinter()
+    return printer.writeValueAsString(this)
+}
 
 @NoArg
 abstract class Domain {

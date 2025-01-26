@@ -2,9 +2,8 @@ package no.sondre.services
 
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.inject.Inject
-import jakarta.ws.rs.BadRequestException
-import no.sondre.repository.RecipeRepository
 import no.sondre.domain.Recipe
+import no.sondre.repository.RecipeRepository
 import java.util.*
 
 @ApplicationScoped
@@ -29,8 +28,6 @@ class RecipeService {
     }
 
     fun update(new: Recipe): Recipe {
-        val old = load(new.idSafe())
-        old.update(new)
-        return old
+        return repo.update(new)
     }
 }

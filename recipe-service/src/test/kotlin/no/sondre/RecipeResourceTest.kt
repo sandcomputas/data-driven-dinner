@@ -34,18 +34,21 @@ class RecipeResourceTest {
             i.name !in savedIngredients.map { it.name }
         }
         for (m in missing) {
-            saveIngredient(m)
+            val saved = saveIngredient(m)
+            m.id = saved.idSafe()
         }
     }
 
-    fun saveIngredient(i: Ingredient) {
-        given()
+    fun saveIngredient(i: Ingredient): Ingredient {
+        return given()
             .contentType(ContentType.JSON)
             .body(i)
             .`when`()
             .post("ingredient")
             .then()
             .statusCode(HttpStatus.SC_OK)
+            .extract()
+            .`as`(Ingredient::class.java)
     }
 
     fun listIngredients(): List<Ingredient> {
@@ -79,7 +82,7 @@ class RecipeResourceTest {
             .then()
             .statusCode(HttpStatus.SC_OK)
             .body(
-//                "id", notNullValue(),
+                "id", notNullValue(),
                 "name", `is`(
                     recipe.name,
                 )

@@ -28,11 +28,7 @@ class Recipe(
         }
     }
 
-    fun update(new: Recipe) {
-        name = new.name
-        ingredients.clear()
-        ingredients.addAll(new.ingredients)
-    }
+
 }
 
 @Entity
@@ -57,5 +53,11 @@ class SQLRecipe(
         val pojo = Recipe(name, youtube, ingredients)
         pojo.withId(id)
         return pojo
+    }
+
+    override fun update(new: Recipe) {
+        name = new.name
+        ingredients.clear()
+        ingredients.addAll(new.ingredients)
     }
 }
