@@ -9,7 +9,7 @@ export const Route = createFileRoute('/recipes/$recipeId/')({
 function RecipeId() {
     const {recipeId} = Route.useParams()
     const {isPending, error, data, isFetching} = useQuery<Recipe>({
-        queryKey: ['recipe'],
+        queryKey: ['recipe', recipeId],
         queryFn: async (): Promise<Recipe> => {
             return fetch(`http://localhost:8080/recipe/${recipeId}`).then((res) => res.json())
         }

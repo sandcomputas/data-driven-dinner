@@ -1,5 +1,6 @@
 interface Recipe {
-    id: string
-    name: string
-    youtube: string
+    id: string | null
+    name: string | null
+    youtube: string | null
+    ingredients: Ingredient[]
 }
