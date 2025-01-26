@@ -3,6 +3,8 @@ import {TanStackRouterDevtools} from '@tanstack/router-devtools'
 // @ts-ignore
 import styles from './root.module.css'
 
+import image from "@/assets/oppskrifter_logo.png"
+
 
 export const Route = createRootRoute({
     component: RootComponent,
@@ -11,6 +13,9 @@ export const Route = createRootRoute({
 function RootComponent() {
     return (
         <>
+            <div className={styles["logoContainer"]}>
+                <img className={styles["logo"]} src={image}/>
+            </div>
             <h1>Oppskrifter</h1>
             <div className={styles["header-row-container"]}>
                 <div className={styles["leftItems"]}>

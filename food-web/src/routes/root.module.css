@@ -2,3 +2,13 @@
     display: flex;
     justify-content: space-between;
 }
+
+.logoContainer {
+    text-align: center;
+    width: 100%;
+}
+
+.logo {
+    width: 100px;
+    height: auto;
+}
