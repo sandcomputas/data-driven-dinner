@@ -32,7 +32,7 @@ class Recipe(
 }
 
 @Entity
-@Table(name = "recipes")
+@Table(name = "recipe")
 class SQLRecipe(
     @Id
     val id: UUID,
