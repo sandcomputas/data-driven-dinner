@@ -57,6 +57,7 @@ class SQLRecipe(
 
     override fun update(new: Recipe) {
         name = new.name
+        youtube = new.youtube
         ingredients.clear()
         ingredients.addAll(new.ingredients)
     }

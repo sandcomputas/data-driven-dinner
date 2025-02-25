@@ -1,5 +1,5 @@
 import {createFileRoute, useNavigate} from "@tanstack/react-router"
-import {useForm} from "@tanstack/react-form";
+import {RecipeForm} from "@/components/RecipeForm/RecipeForm.tsx";
 import {useMutation} from "@tanstack/react-query";
 
 export const Route = createFileRoute("/newRecipe/")({
@@ -7,9 +7,10 @@ export const Route = createFileRoute("/newRecipe/")({
 })
 
 function NewRecipe() {
+
     const navigate = useNavigate()
 
-    const mutation = useMutation<Recipe, unknown, Recipe>({
+    const mutation = useMutation<Recipe, Error, Recipe, unknown>({
         mutationFn: async (recipe): Promise<Recipe> => {
             return fetch("http://localhost:8080/recipe", {
                 method: "POST",
@@ -18,7 +19,6 @@ function NewRecipe() {
             }).then((res) => res.json())
         },
         onSuccess: () => {
-            console.log("succeessssss")
             navigate({to: '/recipes'})
         },
         onError: () => {
@@ -26,55 +26,8 @@ function NewRecipe() {
         }
     })
 
-    const form = useForm({
-        defaultValues: {
-            name: "",
-            youtube: ""
-        },
-        onSubmit: ({value}) => {
-            console.log(value.name, value.youtube)
-            mutation.mutate(
-                {
-                    id: null,
-                    name: value.name,
-                    youtube: value.youtube,
-                    ingredients: []
-                },
-            )
-        }
-    })
-
-
     return (
-        <div>
-            <form.Field
-                name="name"
-                children={(field) => (
-                    <div>
-                        <label>Tittel</label>
-                        <input
-                            type="text"
-                            value={field.state.value}
-                            onChange={(e) => field.handleChange(e.target.value)}
-                        />
-                    </div>
-                )}
-            />
-            <form.Field
-                name="youtube"
-                children={(field) => (
-                    <div>
-                        <label>YouTube Link</label>
-                        <input
-                            type="text"
-                            value={field.state.value}
-                            onChange={(e) => field.handleChange(e.target.value)}
-                        />
-                    </div>
-                )}
-            />
-
-            <button onClick={form.handleSubmit}>Lagre</button>
-        </div>
+        <RecipeForm recipe={null} mutation={mutation} />
     )
 }
+

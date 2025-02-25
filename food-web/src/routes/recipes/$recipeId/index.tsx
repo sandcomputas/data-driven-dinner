@@ -1,12 +1,19 @@
-import {createFileRoute} from '@tanstack/react-router'
-import {useQuery} from "@tanstack/react-query";
+import {createFileRoute, useNavigate} from '@tanstack/react-router'
+import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import renderYoutube from "@/components/EmbeddedYoutube/EmbeddedYoutube.tsx";
+import {useState} from "react";
+import {RecipeForm} from "@/components/RecipeForm/RecipeForm.tsx";
 
 export const Route = createFileRoute('/recipes/$recipeId/')({
     component: RecipeId,
 })
 
 function RecipeId() {
+    const [editOpen, setEditOpen] = useState(false)
+    const navigate = useNavigate()
+
+    const queryClient = useQueryClient()
+
     const {recipeId} = Route.useParams()
     const {isPending, error, data, isFetching} = useQuery<Recipe>({
         queryKey: ['recipe', recipeId],
@@ -15,12 +22,37 @@ function RecipeId() {
         }
     })
 
+    const mutation = useMutation<Recipe, Error, Recipe, unknown>({
+        mutationFn: async (recipe): Promise<Recipe> => {
+            return fetch(`http://localhost:8080/recipe/${recipeId}`, {
+                method: "PUT",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(recipe)
+            }).then((res) => res.json())
+        },
+        onSuccess: () => {
+            setEditOpen(false)
+            queryClient.invalidateQueries({queryKey: ['recipe']})
+            // navigate({to: `/recipes/${recipeId}`})
+        },
+        onError: () => {
+            console.log("Something went wrong...")
+        }
+    })
+
+    const handleEdit = () => {
+        console.log("editing")
+        setEditOpen(true)
+    }
+
     if (isPending || isFetching) return <div>Loading...</div>
     if (error) return <div>Ups! Something has gone wrong here...</div>
     return (
         <div>
             <h1>{data.name}</h1>
-            {data.youtube != undefined && renderYoutube(data.youtube)}
+            {data.youtube != null && data.youtube != undefined && renderYoutube(data.youtube)}
+            <button onClick={handleEdit}>Edit</button>
+            {editOpen && <RecipeForm recipe={data} mutation={mutation}/>}
         </div>
     )
 }
