@@ -1,4 +1,4 @@
-import {createFileRoute, useNavigate} from '@tanstack/react-router'
+import {createFileRoute} from '@tanstack/react-router'
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import renderYoutube from "@/components/EmbeddedYoutube/EmbeddedYoutube.tsx";
 import {useState} from "react";

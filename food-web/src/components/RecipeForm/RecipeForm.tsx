@@ -1,5 +1,6 @@
 import {UseMutationResult} from "@tanstack/react-query";
 import {useForm} from "@tanstack/react-form";
+// @ts-ignore
 import styles from "./RecipeForm.module.css";
 
 type Props = {

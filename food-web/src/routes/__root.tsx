@@ -1,10 +1,9 @@
-import {Link, Outlet, createRootRoute} from '@tanstack/react-router'
+import {createRootRoute, Link, Outlet} from '@tanstack/react-router'
 import {TanStackRouterDevtools} from '@tanstack/router-devtools'
 // @ts-ignore
 import styles from './root.module.css'
 // @ts-ignore
 import image from "@/assets/oppskrifter_logo.png"
-import {RecipeForm} from "@/components/RecipeForm/RecipeForm.tsx";
 import NewRecipe from "@/components/NewRecipe/NewRecipe.tsx";
 import {useState} from "react";
 
