@@ -1,12 +1,13 @@
-import {createFileRoute, useNavigate} from "@tanstack/react-router"
-import {RecipeForm} from "@/components/RecipeForm/RecipeForm.tsx";
+import {useNavigate} from "@tanstack/react-router";
 import {useMutation} from "@tanstack/react-query";
+import {RecipeForm} from "@/components/RecipeForm/RecipeForm.tsx";
 
-export const Route = createFileRoute("/newRecipe/")({
-    component: NewRecipe
-})
+type Props = {
+    isOpen: boolean
+    setIsOpen: (open: boolean) => void
+}
 
-function NewRecipe() {
+function NewRecipe({isOpen, setIsOpen}: Props) {
 
     const navigate = useNavigate()
 
@@ -27,7 +28,8 @@ function NewRecipe() {
     })
 
     return (
-        <RecipeForm recipe={null} mutation={mutation} isOpen={true} setIsOpen={() => navigate({to: "/recipes"})}/>
+        <RecipeForm recipe={null} mutation={mutation} isOpen={isOpen} setIsOpen={setIsOpen}/>
     )
 }
 
+export default NewRecipe;

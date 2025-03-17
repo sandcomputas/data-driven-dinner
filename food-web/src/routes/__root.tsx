@@ -4,12 +4,17 @@ import {TanStackRouterDevtools} from '@tanstack/router-devtools'
 import styles from './root.module.css'
 // @ts-ignore
 import image from "@/assets/oppskrifter_logo.png"
+import {RecipeForm} from "@/components/RecipeForm/RecipeForm.tsx";
+import NewRecipe from "@/components/NewRecipe/NewRecipe.tsx";
+import {useState} from "react";
 
 export const Route = createRootRoute({
     component: RootComponent,
 })
 
 function RootComponent() {
+    const [newRecipeModalOpen, setNewRecipeModalOpen] = useState(false)
+    
     return (
         <>
             <div className={styles["logoContainer"]}>
@@ -24,10 +29,10 @@ function RootComponent() {
                     <Link to="/inspiration">Inspirasjon</Link>
                 </div>
                 <div className={styles["rightItems"]}>
-                    <Link to="/newRecipe">Ny oppskrift</Link>
+                    <button onClick={() => setNewRecipeModalOpen(true)}>Ny oppskrift</button>
                 </div>
             </div>
-
+            <NewRecipe isOpen={newRecipeModalOpen} setIsOpen={setNewRecipeModalOpen}/>
             <hr/>
             <Outlet/>
             <TanStackRouterDevtools position="bottom-right"/>
