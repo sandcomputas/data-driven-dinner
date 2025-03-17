@@ -10,7 +10,6 @@ export const Route = createFileRoute('/recipes/$recipeId/')({
 
 function RecipeId() {
     const [editOpen, setEditOpen] = useState(false)
-    const navigate = useNavigate()
 
     const queryClient = useQueryClient()
 
@@ -52,7 +51,7 @@ function RecipeId() {
             <h1>{data.name}</h1>
             {data.youtube != null && data.youtube != undefined && renderYoutube(data.youtube)}
             <button onClick={handleEdit}>Edit</button>
-            {editOpen && <RecipeForm recipe={data} mutation={mutation}/>}
+            <RecipeForm recipe={data} mutation={mutation} isOpen={editOpen} setIsOpen={setEditOpen}/>
         </div>
     )
 }

@@ -27,7 +27,7 @@ function NewRecipe() {
     })
 
     return (
-        <RecipeForm recipe={null} mutation={mutation} />
+        <RecipeForm recipe={null} mutation={mutation} isOpen={true} setIsOpen={() => navigate({to: "/recipes"})}/>
     )
 }
 

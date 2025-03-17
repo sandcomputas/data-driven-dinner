@@ -1,12 +1,15 @@
 import {UseMutationResult} from "@tanstack/react-query";
 import {useForm} from "@tanstack/react-form";
+import styles from "./RecipeForm.module.css";
 
 type Props = {
     recipe: Recipe | null
     mutation: UseMutationResult<Recipe, Error, Recipe, unknown>
+    isOpen: boolean;
+    setIsOpen: (open: boolean) => void
 }
 
-export function RecipeForm({recipe, mutation}: Props) {
+export function RecipeForm({recipe, mutation, isOpen, setIsOpen}: Props) {
 
     const form = useForm({
         defaultValues: {
@@ -27,37 +30,41 @@ export function RecipeForm({recipe, mutation}: Props) {
         }
     })
 
+    if (!isOpen) return null
 
     return (
-        <div>
-            <form.Field
-                name="name"
-                children={(field) => (
-                    <div>
-                        <label>Tittel</label>
-                        <input
-                            type="text"
-                            value={field.state.value}
-                            onChange={(e) => field.handleChange(e.target.value)}
-                        />
-                    </div>
-                )}
-            />
-            <form.Field
-                name="youtube"
-                children={(field) => (
-                    <div>
-                        <label>YouTube Link</label>
-                        <input
-                            type="text"
-                            value={field.state.value}
-                            onChange={(e) => field.handleChange(e.target.value)}
-                        />
-                    </div>
-                )}
-            />
-
-            <button onClick={form.handleSubmit}>Lagre</button>
+        <div className={styles["modal-overlay"]}>
+            <div className={styles["modal-content"]}>
+                <h2>{recipe ? "Edit Recipe" : "Add New Recipe"}</h2>
+                <form.Field
+                    name="name"
+                    children={(field) => (
+                        <div>
+                            <label>Tittel</label>
+                            <input
+                                type="text"
+                                value={field.state.value}
+                                onChange={(e) => field.handleChange(e.target.value)}
+                            />
+                        </div>
+                    )}
+                />
+                <form.Field
+                    name="youtube"
+                    children={(field) => (
+                        <div>
+                            <label>YouTube Link</label>
+                            <input
+                                type="text"
+                                value={field.state.value}
+                                onChange={(e) => field.handleChange(e.target.value)}
+                            />
+                        </div>
+                    )}
+                />
+                <button onClick={() => setIsOpen(false)}>Lukk</button>
+                <button onClick={form.handleSubmit}>Lagre</button>
+            </div>
         </div>
     )
 }
