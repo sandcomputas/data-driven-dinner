@@ -18,7 +18,7 @@ function RouteComponent() {
           >
             cookwell.com
           </a>{' '}
-          | oppskrifter og matlagningsteknikker
+          | oppskrifter og matlagningsteknikker | more to come
         </li>
       </ul>
     </div>
