@@ -51,7 +51,7 @@ function RecipeId() {
             <h1>{data.name}</h1>
             {data.youtube != null && data.youtube != undefined && renderYoutube(data.youtube)}
             <button onClick={handleEdit}>Edit</button>
-            <RecipeForm recipe={data} mutation={mutation} isOpen={editOpen} setIsOpen={setEditOpen}/>
+            <RecipeForm recipe={data} mutation={mutation} isOpen={editOpen} closeNewRecipeModal={setEditOpen}/>
         </div>
     )
 }

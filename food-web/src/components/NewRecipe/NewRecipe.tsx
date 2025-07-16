@@ -1,16 +1,16 @@
 import {useNavigate} from "@tanstack/react-router";
-import {useMutation} from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {RecipeForm} from "@/components/RecipeForm/RecipeForm.tsx";
 
 type Props = {
     isOpen: boolean
-    setIsOpen: (open: boolean) => void
+    closeNewRecipeModal: () => void
 }
 
-function NewRecipe({isOpen, setIsOpen}: Props) {
+function NewRecipe({isOpen, closeNewRecipeModal}: Props) {
 
     const navigate = useNavigate()
-
+    const queryClient = useQueryClient()
     const mutation = useMutation<Recipe, Error, Recipe, unknown>({
         mutationFn: async (recipe): Promise<Recipe> => {
             return fetch("http://localhost:8080/recipe", {
@@ -20,6 +20,7 @@ function NewRecipe({isOpen, setIsOpen}: Props) {
             }).then((res) => res.json())
         },
         onSuccess: () => {
+            queryClient.invalidateQueries({queryKey: ['recipes']})
             navigate({to: '/recipes'})
         },
         onError: () => {
@@ -28,7 +29,7 @@ function NewRecipe({isOpen, setIsOpen}: Props) {
     })
 
     return (
-        <RecipeForm recipe={null} mutation={mutation} isOpen={isOpen} setIsOpen={setIsOpen}/>
+        <RecipeForm recipe={null} mutation={mutation} isOpen={isOpen} closeNewRecipeModal={closeNewRecipeModal}/>
     )
 }
 
