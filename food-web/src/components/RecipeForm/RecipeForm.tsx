@@ -16,7 +16,8 @@ export function RecipeForm({recipe, mutation, isOpen, closeNewRecipeModal}: Prop
     defaultValues: {
       id: recipe?.id ?? null,
       name: recipe?.name ?? "",
-      youtube: recipe?.youtube ?? ""
+      youtube: recipe?.youtube ?? "",
+      description: recipe?.description ?? ""
     },
     onSubmit: ({value}) => {
       console.log(value.name, value.youtube)
@@ -25,7 +26,8 @@ export function RecipeForm({recipe, mutation, isOpen, closeNewRecipeModal}: Prop
           id: value.id ?? null,
           name: value.name,
           youtube: value.youtube,
-          ingredients: []
+          ingredients: [],
+          description: value.description
         },
       )
       closeNewRecipeModal()
@@ -64,9 +66,24 @@ export function RecipeForm({recipe, mutation, isOpen, closeNewRecipeModal}: Prop
             </div>
           )}
         />
+        <form.Field
+          name="description"
+          children={(field) => (
+            <div>
+              <label>Beskrivelse</label>
+              <textarea
+                value={field.state.value}
+                onChange={(e) => field.handleChange(e.target.value)}
+                rows={20}
+                cols={40}
+              />
+            </div>
+          )}
+        />
         <button onClick={() => closeNewRecipeModal()}>Lukk</button>
         <button onClick={form.handleSubmit}>Lagre</button>
       </div>
     </div>
   )
 }
+

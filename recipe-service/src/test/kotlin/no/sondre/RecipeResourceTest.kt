@@ -20,7 +20,7 @@ class RecipeResourceTest {
         Ingredient("ingredient two")
     )
 
-    private final val recipe = Recipe("recipe one", ingredients = mutableListOf())
+    private final val recipe = Recipe("recipe one", ingredients = mutableListOf(), description = "beskrivelse")
 
     fun assureIngredientsExists() {
         val savedIngredients = given().contentType(ContentType.JSON)

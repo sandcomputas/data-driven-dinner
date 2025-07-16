@@ -49,9 +49,13 @@ function RecipeId() {
     return (
         <div>
             <h1>{data.name}</h1>
-            {data.youtube != null && data.youtube != undefined && renderYoutube(data.youtube)}
+            {data.youtube != null && data.youtube != undefined && data.youtube != "" && renderYoutube(data.youtube)}
+            <h3>Beskrivelse</h3>
+
+            <p style={{ whiteSpace: 'pre-wrap' }}>{data.description}</p>
+            <br/>
             <button onClick={handleEdit}>Edit</button>
-            <RecipeForm recipe={data} mutation={mutation} isOpen={editOpen} closeNewRecipeModal={setEditOpen}/>
+            <RecipeForm recipe={data} mutation={mutation} isOpen={editOpen} closeNewRecipeModal={() => setEditOpen(false)}/>
         </div>
     )
 }

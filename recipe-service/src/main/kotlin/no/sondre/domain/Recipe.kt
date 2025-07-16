@@ -9,6 +9,7 @@ class Recipe(
     var name: String,
     var youtube: String? = null,
     val ingredients: MutableList<RecipeIngredient> = mutableListOf(),
+    val description: String
 ) : Domain() {
     // Properties must be changed using a function so that Hibernate proxy will work
     // https://stackoverflow.com/questions/64503946/update-entity-data-using-quarkus-and-panacherepository-is-not-working
@@ -24,11 +25,9 @@ class Recipe(
 
     fun complete() {
         ingredients.forEach {
-            it.complete(id)
+            it.complete(recipe = id)
         }
     }
-
-
 }
 
 @Entity
@@ -37,20 +36,27 @@ class SQLRecipe(
     @Id
     val id: UUID,
     var name: String,
+    var description: String,
     var youtube: String? = null,
     // TODO: not sure about the cascade option...
     //   I believe None is the correct option but need to test...
     @OneToMany(mappedBy = "recipe", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.EAGER)
-    val ingredients: MutableList<RecipeIngredient> = mutableListOf()
+    val ingredients: MutableList<RecipeIngredient> = mutableListOf(),
 ) : SQLModel<Recipe> {
     companion object : SQLModelCreator<Recipe, SQLRecipe> {
         override fun fromPOJO(pojo: Recipe): SQLRecipe {
-            return SQLRecipe(pojo.idSafe(), pojo.name, pojo.youtube, pojo.ingredients)
+            return SQLRecipe(
+                id = pojo.idSafe(),
+                name = pojo.name,
+                youtube = pojo.youtube,
+                ingredients = pojo.ingredients,
+                description = pojo.description
+            )
         }
     }
 
     override fun toPOJO(): Recipe {
-        val pojo = Recipe(name, youtube, ingredients)
+        val pojo = Recipe(name, youtube, ingredients, description)
         pojo.withId(id)
         return pojo
     }
@@ -60,5 +66,6 @@ class SQLRecipe(
         youtube = new.youtube
         ingredients.clear()
         ingredients.addAll(new.ingredients)
+        description = new.description
     }
 }

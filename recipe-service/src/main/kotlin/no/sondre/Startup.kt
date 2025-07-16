@@ -36,11 +36,11 @@ class Startup {
             SQLIngredient(UUID.randomUUID(), "ingredient two")
         )
         val recipes = listOf(
-            SQLRecipe(UUID.randomUUID(), "recipe one", youtube = "https://www.youtube.com/watch?v=JYg1UfVCfiw", ingredients = mutableListOf()),
-            SQLRecipe(UUID.randomUUID(),"recipe two", ingredients = mutableListOf()),
-            SQLRecipe(UUID.randomUUID(), "recipe three", ingredients = mutableListOf()),
-            SQLRecipe(UUID.randomUUID(), "recipe four", ingredients = mutableListOf()),
-            SQLRecipe(UUID.randomUUID(), "recipe five", ingredients = mutableListOf())
+            SQLRecipe(UUID.randomUUID(), "recipe one", youtube = "https://www.youtube.com/watch?v=JYg1UfVCfiw", ingredients = mutableListOf(), description = "beskrivelse"),
+            SQLRecipe(UUID.randomUUID(),"recipe two", ingredients = mutableListOf(), description = "beskrivelse"),
+            SQLRecipe(UUID.randomUUID(), "recipe three", ingredients = mutableListOf(), description = "beskrivelse"),
+            SQLRecipe(UUID.randomUUID(), "recipe four", ingredients = mutableListOf(), description = "beskrivelse"),
+            SQLRecipe(UUID.randomUUID(), "recipe five", ingredients = mutableListOf(), description = "beskrivelse")
         )
         // Save initial recipe without ingredient (what we will have to do in the service)
         recipeRepository.persist(recipes)

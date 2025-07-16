@@ -15,7 +15,7 @@ import java.util.UUID
 class SQLIngredient(
     @Id
     val id: UUID,
-    var name: String
+    var name: String,
 ) : SQLModel<Ingredient> {
     companion object : SQLModelCreator<Ingredient, SQLIngredient> {
         override fun fromPOJO(pojo: Ingredient): SQLIngredient {
